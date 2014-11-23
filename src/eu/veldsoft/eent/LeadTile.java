@@ -10,7 +10,7 @@ package eu.veldsoft.eent;
  * @author (Mohannad)
  * @version (1.1)
  */
-public class LeadTile extends Tile {
+class LeadTile extends Tile {
 	public static final int LEADER_KING = 1110;
 	public static final int LEADER_PRIEST = 1111;
 	public static final int LEADER_FARMER = 1112;
@@ -30,12 +30,16 @@ public class LeadTile extends Tile {
 		this.owner = own;
 	}
 
-	/** return the type of leader */
+	/**
+	 * return the type of leader
+	 */
 	public int getLeaderType() {
 		return this.leaderType;
 	}
 
-	/** return the player associated with the leadtile */
+	/**
+	 * return the player associated with the leadtile
+	 */
 	public Player getPlayer() {
 		return this.owner;
 	}

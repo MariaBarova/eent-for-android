@@ -14,7 +14,7 @@ package eu.veldsoft.eent;
  * 
  * @author me
  */
-public class Player {
+class Player {
 	public static final int TRES_POINT = 100;
 	public static final int PEOPLE_POINT = 101;
 	public static final int TEMPLE_POINT = 102;
@@ -187,16 +187,18 @@ public class Player {
 			if (turn >= 0 && turn < 1) {
 				return true;
 			}
-			return false;
-		} else {
+		} else if (playerType == CPU) {
 			if (turn >= 0 && turn < 2) {
 				return true;
 			}
-			return false;
 		}
+
+		return false;
 	}
 
-	/** add a scored point to the player */
+	/**
+	 * add a scored point to the player
+	 */
 	public void incr_score(int point_type) {
 		switch (point_type) {
 		case TRES_POINT:

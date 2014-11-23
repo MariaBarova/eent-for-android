@@ -13,7 +13,7 @@ package eu.veldsoft.eent;
  * 
  * @author Administrator
  */
-public class TemTile extends Tile {
+class TemTile extends Tile {
 	private boolean treasure;
 
 	/** Creates a new instance of TemTile */

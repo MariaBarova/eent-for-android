@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class Bag extends JButton {
+class Bag extends JButton {
 
 	/**
 	 * 
@@ -60,10 +60,6 @@ public class Bag extends JButton {
 			CivTile civ = new CivTile(CivTile.MARKET);
 			bagTiles[MARKETS].add(civ);
 		}
-		/*
-		 * System.out.println(bagTiles.length);
-		 * System.out.println(bagTiles[MARKETS].size());
-		 */
 		newTiles = 6;
 
 		totalTiles = getTotalTiles();
@@ -132,17 +128,10 @@ public class Bag extends JButton {
 				}
 
 				totalTiles = getTotalTiles();
+
 				/*
-				 * debug info System.out.println("settlementTile="+
-				 * bagTiles[SETTLEMENTS].size());
-				 * System.out.println("templeTile="+ bagTiles[TEMPLES].size());
-				 * System.out.println("farmTile="+ bagTiles[FARMS].size() );
-				 * System.out.println("marketTile=" + bagTiles[MARKETS].size());
-				 * System.out.println("totalTile="+ totalTiles);
+				 * Change the bag icon when durning the game
 				 */
-
-				/** Change the bag icon when durning the game */
-
 				if (totalTiles == 105) {
 					Tigris2.tileBag.setIcon(new ImageIcon(getClass()
 							.getResource("/images/bag-half.gif")));
@@ -171,9 +160,6 @@ public class Bag extends JButton {
 				temp++;
 			}
 		}
-		/*
-		 * debug info System.out.println(temp + " new Tiles");
-		 */
 		newTileArray = getNewTiles(temp);
 		for (int i = 0; i < tempciv.length; i++) {
 			if (tempciv[i] == null) {

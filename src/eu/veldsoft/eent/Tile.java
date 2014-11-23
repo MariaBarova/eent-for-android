@@ -25,12 +25,16 @@ public class Tile {
 
 	private int tileType;
 
-	/** Creates a new instance of Tile */
+	/**
+	 * Creates a new instance of Tile
+	 */
 	public Tile(int newType) {
 		tileType = newType;
 	}
 
-	/** Return the type of Civilisation Tile */
+	/**
+	 * Return the type of Civilisation Tile
+	 */
 	public int getTileType() {
 		return tileType;
 	}

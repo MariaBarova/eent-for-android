@@ -17,7 +17,7 @@ package eu.veldsoft.eent;
  */
 import java.util.Vector;
 
-public class Kingdom {
+class Kingdom {
 	private Vector<Grid> settlements;
 	private Vector<Grid> farmers;
 	private Vector<Grid> temples;
@@ -204,53 +204,30 @@ public class Kingdom {
 
 	public void addLeader(Grid grid) {
 		LeadTile lead = (LeadTile) grid.getTile();
-		/*
-		 * debug info System.out.println("trying to add leader from " +
-		 * grid.getActionCommand() + " to " + this);
-		 * System.out.println(grid.getActionCommand() + " in " +
-		 * grid.getKingdom()+ " is " + grid.inKingdom());
-		 * System.out.println("previous " + previous_kingdom);
-		 */
+
 		switch (lead.getLeaderType()) {
 		case LeadTile.LEADER_KING:
 			if (hasKing() == NO_LEADER) {
 				grid.setKingdom(this);
-				/*
-				 * debug info System.out.println("set kingdom of " +
-				 * grid.getActionCommand() + " to " + this);
-				 */
 				leaders[LeadTile.LEADER_KING - LeadTile.LEAD] = grid;
-			} else {
-				// System.out.println("boink"+((Kingdom)this).getKingdomNum()+lead.getLeaderType());
-				// Board.conflict = true;
-				// Board.conflict(this,lead,grid);
 			}
 			break;
 		case LeadTile.LEADER_PRIEST:
 			if (hasPriest() == NO_LEADER) {
 				grid.setKingdom(this);
 				leaders[LeadTile.LEADER_PRIEST - LeadTile.LEAD] = grid;
-			} else {
-				// Board.conflict = true;
-				// Board.conflict(this,lead,grid);
 			}
 			break;
 		case LeadTile.LEADER_TRADER:
 			if (hasTrader() == NO_LEADER) {
 				grid.setKingdom(this);
 				leaders[LeadTile.LEADER_TRADER - LeadTile.LEAD] = grid;
-			} else {
-				// Board.conflict = true;
-				// Board.conflict(this,lead,grid);
 			}
 			break;
 		case LeadTile.LEADER_FARMER:
 			if (hasFarmer() == NO_LEADER) {
 				grid.setKingdom(this);
 				leaders[LeadTile.LEADER_FARMER - LeadTile.LEAD] = grid;
-			} else {
-				// Board.conflict = true;
-				// Board.conflict(this,lead,grid);
 			}
 			break;
 		}
@@ -488,7 +465,6 @@ public class Kingdom {
 	/** return the number of markets in this kingdom */
 	public int getNumberOfMarkets() {
 		return markets.size();
-
 	}
 
 	/**
@@ -508,11 +484,10 @@ public class Kingdom {
 	 * join two vector with the result of a new vector that has only the
 	 * elements of each that are different
 	 */
-	private Vector<Kingdom> unifyVectors(Vector<Kingdom> vector_a, Vector<Kingdom> vector_b) {
+	private Vector<Kingdom> unifyVectors(Vector<Kingdom> vector_a,
+			Vector<Kingdom> vector_b) {
 		for (int i = 0; i < vector_b.size(); i++) {
-			if (vector_a.contains(vector_b.elementAt(i))) {
-				// do nothing;
-			} else {
+			if (vector_a.contains(vector_b.elementAt(i)) == false) {
 				vector_a.add(vector_b.elementAt(i));
 			}
 		}
@@ -525,14 +500,12 @@ public class Kingdom {
 	 */
 	public Vector<Kingdom> wanderKingdoms(Kingdom exclude_me) {
 		Vector<Kingdom> joinedKingdoms = new Vector<Kingdom>();
-		/*
-		 * if (times > 10) { return joinedKingdoms; } else { times++;
-		 */
+
 		joinedKingdoms.add(this);
 		for (int i = 0; i < joinedWith.size(); i++) {
 			if (exclude_me != null
 					&& joinedWith.elementAt(i).equals(exclude_me)) {
-
+				// TODO Remove empty if body.
 			} else {
 				joinedKingdoms = unifyVectors(joinedKingdoms,
 						((Kingdom) joinedWith.elementAt(i))
@@ -540,7 +513,6 @@ public class Kingdom {
 			}
 		}
 		return joinedKingdoms;
-		// }
 	}
 
 	/** return the joined Kingdoms */
@@ -563,14 +535,12 @@ public class Kingdom {
 	 * check to see if this kingdom is joined with a kingdom
 	 */
 	public boolean isJoined() {
-		if (joinedWith.isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
+		return (!joinedWith.isEmpty());
 	}
 
-	/** join two kingdoms together */
+	/**
+	 * join two kingdoms together
+	 */
 	public boolean joinKingdoms(Kingdom k_dom) {
 		Vector<Kingdom> temp_vector = wanderKingdoms(null);
 		if (temp_vector.contains(k_dom)) {

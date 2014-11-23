@@ -16,11 +16,8 @@ package eu.veldsoft.eent;
  */
 
 import javax.swing.JButton;
-//import javax.swing.event.*;
-//import javax.swing.border.*;
-//import java.awt.event.*;
 
-public class Grid extends JButton implements Runnable {
+class Grid extends JButton implements Runnable {
 	/**
 	 * 
 	 */
@@ -135,9 +132,7 @@ public class Grid extends JButton implements Runnable {
 		String gridText = selected.getActionCommand();
 		int gridNumber = Integer.parseInt((this.getActionCommand()).substring(
 				0, 1));
-		// System.out.println(gridNumber);
 		if (gridText.endsWith("B")) {
-			// Tigris2.infolabel.setText(selected.getGridType()+"");
 			if (this.hasTile()) {
 				if ((this.getTile()).getTileType() == Tile.CIV_TILE
 						&& (this.getActionCommand()).endsWith("P")) {
@@ -149,10 +144,6 @@ public class Grid extends JButton implements Runnable {
 						return false;
 					} else if (selected.getGridType() == Grid.WATER
 							|| selected.getGridType() == Grid.GROUND) {
-						/*
-						 * debug info System.out.println(
-						 * "-----------------------------------------");
-						 */
 						/*
 						 * call checkKingdoms to choose which action should be
 						 * done
@@ -173,15 +164,12 @@ public class Grid extends JButton implements Runnable {
 							System.out.println(Board.currentPlayer);
 							Board.unification(this, selected);
 							return true;
-							// selected.setType(Grid.unif);
 							// unification code here
 						} else if (temp == Board.EXTERNAL_CONFLICT) {
-							// Board.conflict=true;
 							cause_conflict = selected;
 							cause_conflict.setTile(getTile());
 							conflict_player = Board.currentPlayer;
 							Board.conflict = true;
-							// selected.setTile(getTile());
 							System.out.println("external conflict");
 
 							if (this.getActionCommand().endsWith("B"))
@@ -191,15 +179,9 @@ public class Grid extends JButton implements Runnable {
 							}
 							Thread th1 = new Thread(this, "ext_conflict");
 							th1.start();
-							// if
-							// (Board.externalConflict(Board.currentPlayer,selected))
-							// System.out.println("conflict is solved");
 
 							// external conflict code here
 						}
-
-						// System.out.println(gridNumber);
-						// Board.creatKingdoms(selected);
 					} else {
 						Tigris2.infolabel
 								.setText("Already used. Please select another location.");
@@ -215,10 +197,6 @@ public class Grid extends JButton implements Runnable {
 									.getGridType() == Grid.GROUND)
 							|| ((this.getTile()).getTileType() == CatTile.CAT_TILE && selected
 									.getTile().getTileType() == Tile.CIV_TILE)) {
-						/*
-						 * debug info System.out.println(
-						 * "-----------------------------------------");
-						 */
 						selected.setTile(this.getTile());
 						selected.setKingdom(null);
 
@@ -247,17 +225,6 @@ public class Grid extends JButton implements Runnable {
 						 */
 						int temp = Board.checkKingdom(this, selected);
 						if (temp >= 0) {
-							/*
-							 * debug info System.out.println(
-							 * "-----------------------------------------");
-							 * System.out.println(this.getActionCommand() +
-							 * " in " + this.getKingdom() + " is " +
-							 * this.inKingdom());
-							 * System.out.println("kingdom number " + temp);
-							 * System.out.println("place " +
-							 * selected.getActionCommand() + " in " +
-							 * Board.getKingdom(temp));
-							 */
 							if ((this.getActionCommand()).endsWith("L")) {
 								selected.setTile(this.getTile());
 								Board.getKingdom(temp).addLeader(selected);
@@ -265,28 +232,15 @@ public class Grid extends JButton implements Runnable {
 							} else {
 								if (Board.getKingdom(temp) == this.getKingdom()) {
 									selected.setTile(this.getTile());
-									/*
-									 * debug info
-									 * System.out.println("trying to remove " +
-									 * this.getActionCommand() + " from " +
-									 * this.kingdom);
-									 */
 									(this.kingdom).removeGridFromKingdom(this);
 									Board.getKingdom(temp).addLeader(selected);
 								} else {
 									selected.setTile(this.getTile());
 									Board.getKingdom(temp).addLeader(selected);
-									/*
-									 * debug info
-									 * System.out.println("trying to remove " +
-									 * this.getActionCommand() + " from " +
-									 * this.kingdom);
-									 */
 									(this.kingdom).removeGridFromKingdom(this);
 								}
 							}
 						} else if (temp == Board.INTERNAL_CONFLICT) {
-							// Board.conflict=true;
 							cause_conflict = selected;
 							cause_conflict.setTile(getTile());
 							conflict_player = Board.currentPlayer;
@@ -295,8 +249,6 @@ public class Grid extends JButton implements Runnable {
 							} else {
 								this.removePlayerTile();
 							}
-							// System.out.println("internal conflict");
-							// Tigris2.infolabel.setText("select support temples an pressd the OK button");
 							Thread th = new Thread(this, "int_conflict");
 							th.start();
 
@@ -309,7 +261,6 @@ public class Grid extends JButton implements Runnable {
 							Board.currentPlayer.removeLeadTile(gridNumber - 6);
 						}
 
-						// Board.creatKingdoms(selected);
 						Tigris2.infolabel.setText("Playing");
 						Tigris2.checkPlayerTurn();
 						return true;
@@ -388,9 +339,7 @@ public class Grid extends JButton implements Runnable {
 				break;
 			}
 		} else {
-			if (Board.currentPlayer.isCPU()) {
-				// do nothing
-			} else {
+			if (Board.currentPlayer.isCPU() == false) {
 				setType(STOP);
 			}
 		}
@@ -405,9 +354,7 @@ public class Grid extends JButton implements Runnable {
 		if (this.hasTile()) {
 			if ((this.getActionCommand()).endsWith("P")) {
 				placeTile(tile);
-			}
-
-			else if ((placedTile.getTileType() != Tile.CAT_TILE)
+			} else if ((placedTile.getTileType() != Tile.CAT_TILE)
 					&& (tile.getTileType() == Tile.CAT_TILE)) {
 				placeTile(tile);
 			}
@@ -421,9 +368,7 @@ public class Grid extends JButton implements Runnable {
 	 */
 	public void removePlayerTile() {
 		placedTile = null;
-		if (Board.currentPlayer.isCPU()) {
-			// do nothing
-		} else {
+		if (Board.currentPlayer.isCPU() == false) {
 			setType(STOP);
 		}
 	}
@@ -482,11 +427,7 @@ public class Grid extends JButton implements Runnable {
 	 * check to see if a grid is associated with a Kingdom
 	 */
 	public boolean inKingdom() {
-		if (kingdom == null) {
-			return false;
-		} else {
-			return true;
-		}
+		return ((kingdom == null) ? false : true);
 	}
 
 	/**
@@ -515,43 +456,31 @@ public class Grid extends JButton implements Runnable {
 	public void run() {
 		System.out.println(Thread.currentThread().getName());
 		if (Thread.currentThread().getName().equals("int_conflict")) {
-			// Thread myThread = Thread.currentThread();
-
 			try {
 				while (Board.pressed != Tigris2.OK) {
 					Tigris2.infolabel
 							.setText("select support temples and pressd the OK button");
 					Thread.sleep(2000);
-					// System.out.println("went to sleep");
 				}
 			} catch (InterruptedException e) {
 				// the VM doesn't want us to sleep anymore,
 				// so get back to work
 			}
 
-			// System.out.println("conflict"+cause_conflict);
-			// System.out.println(conflict_player);
 			Board.conflict(conflict_player, cause_conflict);
 			Tigris2.infolabel.setText("conflict done");
-			// System.out.println("conflict done");
-
 		} else if (Thread.currentThread().getName().equals("ext_conflict")) {
 			try {
 				while (Board.pressed != Tigris2.OK) {
 					Tigris2.infolabel
 							.setText("select support tiles and pressd the OK button");
 					Thread.sleep(2000);
-					// System.out.println("went to sleep");
 				}
 			} catch (InterruptedException e) {
 				// the VM doesn't want us to sleep anymore,
 				// so get back to work
 			}
-			// System.out.println("conflict"+cause_conflict);
-			// System.out.println(conflict_player);
 			Board.externalConflict(conflict_player, cause_conflict);
-			// Tigris2.infolabel.setText("conflict done");
-			// System.out.println("conflict done");
 		}
 	}
 }

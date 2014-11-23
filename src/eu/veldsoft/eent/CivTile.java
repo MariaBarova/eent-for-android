@@ -13,7 +13,7 @@ package eu.veldsoft.eent;
  * 
  * @author Administrator
  */
-public class CivTile extends Tile {
+class CivTile extends Tile {
 
 	public static final int MARKET = 1111;
 

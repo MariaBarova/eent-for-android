@@ -46,7 +46,7 @@ public class Tigris2 extends JFrame {
 	private JDesktopPane jDesktopPane1;
 	private Board board = new Board();
 	private ButtonListener a1 = new ButtonListener();
-		private BagListener a2 = new BagListener();
+	private BagListener a2 = new BagListener();
 	private CheckBoxListener a3 = new CheckBoxListener();
 	public static Grid[] uic = new Grid[13];
 	public JButton Cancel, Ok;
@@ -57,11 +57,14 @@ public class Tigris2 extends JFrame {
 	private static int playercount;
 	private static Bag currentBag;
 
-	/*
+	/**
 	 * public HumanPlayer hump; public ComputerPlayer cpu;
 	 */
 	public static Bag tileBag;
 
+	/**
+	 * 
+	 */
 	public Tigris2() {
 		initComponents();
 		this.setBounds(0, 0, 800, 600);
@@ -69,8 +72,10 @@ public class Tigris2 extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 */
 	private void initComponents() {
-
 		setTitle("Euphrates & Tigris");
 		setFocusableWindowState(false);
 		setFont(new Font("Arial", 0, 12));
@@ -94,7 +99,6 @@ public class Tigris2 extends JFrame {
 		playercount = 0;
 		Board.currentPlayer = players[playercount];
 
-		// uic[11].setBorderPainted(false);
 		tileBag.setIcon(new ImageIcon(getClass().getResource(
 				"/images/bag-full.gif")));
 		tileBag.setBorder(new BevelBorder(BevelBorder.RAISED));
@@ -114,7 +118,9 @@ public class Tigris2 extends JFrame {
 
 		}
 
-		/** give the players their civTiles */
+		/*
+		 * give the players their civTiles
+		 */
 		for (int p = 0; p < players.length; p++) {
 			if (players[p].isCPU()) {
 				currentBag.setPlayerTiles(players[p]);
@@ -125,7 +131,9 @@ public class Tigris2 extends JFrame {
 
 		x = 320;
 
-		/** Placing the leader tiles */
+		/*
+		 * Placing the leader tiles
+		 */
 		LeadTile[] templead = players[0].getLeaders();
 		for (; i < 10; i++) {
 			uic[i] = new Grid(-1, x, 460, 35, 35, (i + "L"), null);
@@ -136,19 +144,16 @@ public class Tigris2 extends JFrame {
 		}
 
 		uic[10] = new Grid(-1, 530, 450, 35, 35, "10C", null);
-		// uic[10].setBorderPainted(false);
 		uic[10].setTile(new Tile(CatTile.CAT_TILE));
 		uic[10].addActionListener(a1);
 		jDesktopPane1.add(uic[10], JLayeredPane.DEFAULT_LAYER);
 
 		uic[11] = new Grid(-1, 575, 450, 35, 35, "11C", null);
-		// uic[11].setBorderPainted(false);
 		uic[11].setTile(new Tile(CatTile.CAT_TILE));
 		uic[11].addActionListener(a1);
 		jDesktopPane1.add(uic[11], JLayeredPane.DEFAULT_LAYER);
 
 		Cancel = new JButton();
-		// uic[11].setBorderPainted(false);
 		Cancel.setText("Cancel");
 		Cancel.setBorder(new BevelBorder(BevelBorder.RAISED));
 		Cancel.setActionCommand(CANCEL);
@@ -157,7 +162,6 @@ public class Tigris2 extends JFrame {
 		jDesktopPane1.add(Cancel, JLayeredPane.DEFAULT_LAYER);
 
 		Ok = new JButton();
-		// uic[11].setBorderPainted(false);
 		Ok.setText("OK");
 		Ok.setBorder(new BevelBorder(BevelBorder.RAISED));
 		Ok.setActionCommand(OK);
@@ -171,38 +175,35 @@ public class Tigris2 extends JFrame {
 		infolabel.setBounds(50, 510, 455, 30);
 		infolabel.setBackground(Color.white);
 		infolabel.setOpaque(true);
-		// infolabel.setForeground(Color.white);
 		jDesktopPane1.add(infolabel, JLayeredPane.DEFAULT_LAYER);
 
 		ScoreBoard1 = new JLabel();
 		ScoreBoard1.setHorizontalAlignment(SwingConstants.CENTER);
-		// ScoreBoard1.setText(String.valueOf(HumanPlayer.score[3]));
 		ScoreBoard1.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
 		ScoreBoard1.setBounds(550, 510, 30, 30);
 		jDesktopPane1.add(ScoreBoard1, JLayeredPane.DEFAULT_LAYER);
 
 		ScoreBoard2 = new JLabel();
 		ScoreBoard2.setHorizontalAlignment(SwingConstants.CENTER);
-		// ScoreBoard2.setText(String.valueOf(HumanPlayer.score[4]));
 		ScoreBoard2.setBorder(new LineBorder(new Color(255, 0, 0), 4, true));
 		ScoreBoard2.setBounds(590, 510, 30, 30);
 		jDesktopPane1.add(ScoreBoard2, JLayeredPane.DEFAULT_LAYER);
 
 		ScoreBoard3 = new JLabel();
 		ScoreBoard3.setHorizontalAlignment(SwingConstants.CENTER);
-		// ScoreBoard3.setText(String.valueOf(HumanPlayer.score[1]));
 		ScoreBoard3.setBorder(new LineBorder(new Color(0, 51, 255), 4, true));
 		ScoreBoard3.setBounds(630, 510, 30, 30);
 		jDesktopPane1.add(ScoreBoard3, JLayeredPane.DEFAULT_LAYER);
 
 		ScoreBoard4 = new JLabel();
 		ScoreBoard4.setHorizontalAlignment(SwingConstants.CENTER);
-		// ScoreBoard4.setText(String.valueOf(HumanPlayer.score[2]));
 		ScoreBoard4.setBorder(new LineBorder(new Color(0, 204, 0), 4, true));
 		ScoreBoard4.setBounds(670, 510, 30, 30);
 		jDesktopPane1.add(ScoreBoard4, JLayeredPane.DEFAULT_LAYER);
 
-		/** Checkboxes te swap player tiles */
+		/*
+		 * Checkboxes te swap player tiles
+		 */
 		jCheckBox1 = new JCheckBox();
 		jCheckBox1.setBackground((Color) UIManager.getDefaults().get(
 				"Button.focus"));
@@ -264,31 +265,30 @@ public class Tigris2 extends JFrame {
 	 * and resets the old players turn
 	 */
 	public static void checkPlayerTurn() {
-		if (Board.currentPlayer != null) {
-			if (Board.currentPlayer.hasTurn()) {
+		if (Board.currentPlayer == null) {
+			return;
+		}
+
+		if (Board.currentPlayer.hasTurn()) {
+			if (Board.currentPlayer.isCPU() == false) {
+				Board.currentPlayer.incr_turn();
+			}
+		} else {
+			Board.currentPlayer.reset_turn();
+			if (Board.currentPlayer.isCPU()) {
+				currentBag.setPlayerTiles(Board.currentPlayer);
+			} else {
+				currentBag.setImage(Board.currentPlayer);
+			}
+
+			if (playercount == 0) {
+				Board.currentPlayer = players[++playercount];
 				if (Board.currentPlayer.isCPU()) {
-					// do nothing
-				} else {
-
-					Board.currentPlayer.incr_turn();
-
+					((ComputerPlayer) Board.currentPlayer).ComputerPlay();
 				}
 			} else {
-				Board.currentPlayer.reset_turn();
-				if (Board.currentPlayer.isCPU()) {
-					currentBag.setPlayerTiles(Board.currentPlayer);
-				} else {
-					currentBag.setImage(Board.currentPlayer);
-				}
-				if (playercount == 0) {
-					Board.currentPlayer = players[++playercount];
-					if (Board.currentPlayer.isCPU()) {
-						((ComputerPlayer) Board.currentPlayer).ComputerPlay();
-					}
-				} else {
-					playercount = 0;
-					Board.currentPlayer = players[playercount];
-				}
+				playercount = 0;
+				Board.currentPlayer = players[playercount];
 			}
 		}
 	}

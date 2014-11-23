@@ -13,7 +13,7 @@ package eu.veldsoft.eent;
  * 
  * @author me
  */
-public class ScoreCounter {
+class ScoreCounter {
 
 	/** Creates a new instance of ScoreCounter */
 	public ScoreCounter() {

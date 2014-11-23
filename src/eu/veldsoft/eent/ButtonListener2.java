@@ -16,7 +16,7 @@ package eu.veldsoft.eent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ButtonListener2 implements ActionListener {
+class ButtonListener2 implements ActionListener {
 
 	Grid Checkbox[] = new Grid[6];
 

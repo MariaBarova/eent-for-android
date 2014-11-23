@@ -13,7 +13,7 @@ package eu.veldsoft.eent;
  * 
  * @author me
  */
-public class ComputerPlayer extends Player {
+class ComputerPlayer extends Player {
 
 	private int civ, chooser, lead, cat, row, col;
 

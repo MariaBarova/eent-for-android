@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
-public class Board extends JDesktopPane {
+class Board extends JDesktopPane {
 	/**
 	 * 
 	 */
@@ -283,103 +283,107 @@ public class Board extends JDesktopPane {
 	}
 
 	public static void Monument(Grid selc) {
-		if (monument > 0) {
-			String cmd = selc.getActionCommand();
-			int row = Integer.parseInt(cmd.substring(0, cmd.indexOf('-')));
-			int col = Integer.parseInt(cmd.substring(cmd.indexOf('-') + 1,
-					cmd.length() - 1));
-			boolean check1 = false, check2 = false, check3 = false, check4 = false;
+		if (monument <= 0) {
+			return;
+		}
 
-			if (col + 1 < 16) {
-				check1 = true;
-			}
-			if (col - 1 >= 0) {
-				check2 = true;
-			}
-			if (row + 1 < 11) {
-				check3 = true;
-			}
-			if (row - 1 >= 0) {
-				check4 = true;
-			}
+		String cmd = selc.getActionCommand();
+		int row = Integer.parseInt(cmd.substring(0, cmd.indexOf('-')));
+		int col = Integer.parseInt(cmd.substring(cmd.indexOf('-') + 1,
+				cmd.length() - 1));
+		boolean check1 = false, check2 = false, check3 = false, check4 = false;
 
-			if (check1 && check3) {
-				if (selc.getGridType() == (Board.grids[row][col + 1])
-						.getGridType()
-						&& selc.getGridType() == (Board.grids[row + 1][col])
-								.getGridType()
-						&& selc.getGridType() == (Board.grids[row + 1][col + 1])
-								.getGridType()) {
-					monument--;
-					System.out.println("is een mon1" + " M " + monument);
-					selc.setType(Grid.MON1);
-					Board.grids[row][col + 1].setType(Grid.MON2);
-					Board.grids[row + 1][col].setType(Grid.MON3);
-					Board.grids[row + 1][col + 1].setType(Grid.MON4);
-					check1 = false;
-					check2 = false;
-					check3 = false;
-					check4 = false;
-				}
-			}
-			if (check1 && check4) {
-				if (selc.getGridType() == (Board.grids[row - 1][col])
-						.getGridType()
-						&& selc.getGridType() == (Board.grids[row][col + 1])
-								.getGridType()
-						&& selc.getGridType() == (Board.grids[row - 1][col + 1])
-								.getGridType()) {
-					monument--;
-					System.out.println("is een mon2" + " M" + monument);
-					Board.grids[row - 1][col].setType(Grid.MON1);
-					Board.grids[row - 1][col + 1].setType(Grid.MON2);
-					selc.setType(Grid.MON3);
-					Board.grids[row][col + 1].setType(Grid.MON4);
-					check1 = false;
-					check2 = false;
-					check3 = false;
-					check4 = false;
-				}
-			}
-			if (check2 && check3) {
-				if (selc.getGridType() == (Board.grids[row][col - 1])
-						.getGridType()
-						&& selc.getGridType() == (Board.grids[row + 1][col - 1])
-								.getGridType()
-						&& selc.getGridType() == (Board.grids[row + 1][col])
-								.getGridType()) {
-					monument--;
-					System.out.println("is een mon3" + " M" + monument);
-					Board.grids[row][col - 1].setType(Grid.MON1);
-					selc.setType(Grid.MON2);
-					Board.grids[row + 1][col - 1].setType(Grid.MON3);
-					Board.grids[row + 1][col].setType(Grid.MON4);
-					check1 = false;
-					check2 = false;
-					check3 = false;
-					check4 = false;
-				}
-			}
+		if (col + 1 < 16) {
+			check1 = true;
+		}
+		if (col - 1 >= 0) {
+			check2 = true;
+		}
+		if (row + 1 < 11) {
+			check3 = true;
+		}
+		if (row - 1 >= 0) {
+			check4 = true;
+		}
 
-			if (check2 && check4) {
-				if (selc.getGridType() == (Board.grids[row - 1][col])
+		if (check1
+				&& check3
+				&& selc.getGridType() == (Board.grids[row][col + 1])
 						.getGridType()
-						&& selc.getGridType() == (Board.grids[row - 1][col - 1])
-								.getGridType()
-						&& selc.getGridType() == (Board.grids[row][col - 1])
-								.getGridType()) {
-					monument--;
-					System.out.println("is een mon4" + " M" + monument);
-					Board.grids[row - 1][col - 1].setType(Grid.MON1);
-					Board.grids[row - 1][col].setType(Grid.MON2);
-					Board.grids[row][col - 1].setType(Grid.MON3);
-					selc.setType(Grid.MON4);
-					check1 = false;
-					check2 = false;
-					check3 = false;
-					check4 = false;
-				}
-			}
+				&& selc.getGridType() == (Board.grids[row + 1][col])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row + 1][col + 1])
+						.getGridType()) {
+			monument--;
+			System.out.println("is een mon1" + " M " + monument);
+			selc.setType(Grid.MON1);
+			Board.grids[row][col + 1].setType(Grid.MON2);
+			Board.grids[row + 1][col].setType(Grid.MON3);
+			Board.grids[row + 1][col + 1].setType(Grid.MON4);
+			check1 = false;
+			check2 = false;
+			check3 = false;
+			check4 = false;
+		}
+
+		if (check1
+				&& check4
+				&& selc.getGridType() == (Board.grids[row - 1][col])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row][col + 1])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row - 1][col + 1])
+						.getGridType()) {
+			monument--;
+			System.out.println("is een mon2" + " M" + monument);
+			Board.grids[row - 1][col].setType(Grid.MON1);
+			Board.grids[row - 1][col + 1].setType(Grid.MON2);
+			selc.setType(Grid.MON3);
+			Board.grids[row][col + 1].setType(Grid.MON4);
+			check1 = false;
+			check2 = false;
+			check3 = false;
+			check4 = false;
+		}
+
+		if (check2
+				&& check3
+				&& selc.getGridType() == (Board.grids[row][col - 1])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row + 1][col - 1])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row + 1][col])
+						.getGridType()) {
+			monument--;
+			System.out.println("is een mon3" + " M" + monument);
+			Board.grids[row][col - 1].setType(Grid.MON1);
+			selc.setType(Grid.MON2);
+			Board.grids[row + 1][col - 1].setType(Grid.MON3);
+			Board.grids[row + 1][col].setType(Grid.MON4);
+			check1 = false;
+			check2 = false;
+			check3 = false;
+			check4 = false;
+		}
+
+		if (check2
+				&& check4
+				&& selc.getGridType() == (Board.grids[row - 1][col])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row - 1][col - 1])
+						.getGridType()
+				&& selc.getGridType() == (Board.grids[row][col - 1])
+						.getGridType()) {
+			monument--;
+			System.out.println("is een mon4" + " M" + monument);
+			Board.grids[row - 1][col - 1].setType(Grid.MON1);
+			Board.grids[row - 1][col].setType(Grid.MON2);
+			Board.grids[row][col - 1].setType(Grid.MON3);
+			selc.setType(Grid.MON4);
+			check1 = false;
+			check2 = false;
+			check3 = false;
+			check4 = false;
 		}
 	}
 
@@ -414,13 +418,12 @@ public class Board extends JDesktopPane {
 		Vector<Kingdom> temp_vector = new Vector<Kingdom>();
 		for (int i = 0; i < temp_array.length; i++) {
 			if (temp_array[i] == null) {
-				// do nothing
-			} else if (temp_array[i].inKingdom()) {
-				if (temp_vector.contains(temp_array[i].getKingdom())) {
-					// do nothing
-				} else {
-					temp_vector.add(temp_array[i].getKingdom());
-				}
+				continue;
+			}
+
+			if (temp_array[i].inKingdom()
+					&& temp_vector.contains(temp_array[i].getKingdom()) == false) {
+				temp_vector.add(temp_array[i].getKingdom());
 			}
 		}
 		return temp_vector;
@@ -1530,7 +1533,6 @@ public class Board extends JDesktopPane {
 					// if the winner is the attackers he gets the points
 					for (int i = 0; i <= first_kingdom.getNumberOfMarkets(); i++) {
 						attacker.incr_score(Player.MARKET_POINT);
-						// System.out.println("attacker wins");
 					}
 
 					// remove and return the leader that lost the conflict
@@ -1558,7 +1560,6 @@ public class Board extends JDesktopPane {
 				else if (((LeadTile) trader2.getTile()).getPlayer() == defender) {
 					for (int i = 0; i <= first_kingdom.getNumberOfMarkets(); i++) {
 						defender.incr_score(Player.MARKET_POINT);
-						// System.out.println("defender wins");
 					}
 					LeadTile[] temp_lead_tile = attacker.getLeaders();
 					for (int i = 0; i < temp_lead_tile.length; i++) {
@@ -1590,9 +1591,7 @@ public class Board extends JDesktopPane {
 				if (((LeadTile) priest1.getTile()).getPlayer() == defender) {
 					for (int i = 0; i <= first_kingdom.getNumberOfMarkets(); i++) {
 						defender.incr_score(Player.MARKET_POINT);
-						// System.out.println("attacker wins");
 					}
-					// attacker=((LeadTile)king2.getTile()).getPlayer();
 
 					LeadTile[] temp_lead_tile = attacker.getLeaders();
 					for (int i = 0; i < temp_lead_tile.length; i++) {
@@ -1619,7 +1618,6 @@ public class Board extends JDesktopPane {
 				} else {
 					for (int i = 0; i <= second_kingdom.getNumberOfMarkets(); i++) {
 						defender.incr_score(Player.MARKET_POINT);
-						// System.out.println("defender wins");
 					}
 					LeadTile[] temp_lead_tile = attacker.getLeaders();
 					for (int i = 0; i < temp_lead_tile.length; i++) {

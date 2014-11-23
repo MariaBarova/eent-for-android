@@ -13,7 +13,7 @@ package eu.veldsoft.eent;
  * 
  * @author Administrator
  */
-public class CatTile extends Tile {
+class CatTile extends Tile {
 
 	/** Creates a new instance of DisTile */
 	public CatTile() {

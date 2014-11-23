@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-public class ButtonListener implements ActionListener {
+class ButtonListener implements ActionListener {
 	JButton sel;
 	Grid selected;
 
@@ -30,41 +30,34 @@ public class ButtonListener implements ActionListener {
 	String gridText;
 
 	public void actionPerformed(ActionEvent e) {
-		if (Board.currentPlayer != null) {
-			if (Board.currentPlayer.isCPU()) {
-				// do nothing
-			} else {
-				sel = (JButton) e.getSource();
-				gridText = sel.getActionCommand();
-				Board.pressed = gridText;
-				// Tigris2.infolabel.setText(gridText);
-				if ((gridText == Tigris2.OK)) {
-					// Board.getSelected();
-				}
+		if (Board.currentPlayer == null) {
+			return;
+		}
+		if (Board.currentPlayer.isCPU() == true) {
+			return;
+		}
 
-				else if (gridText == Tigris2.CANCEL) {
+		sel = (JButton) e.getSource();
+		gridText = sel.getActionCommand();
+		Board.pressed = gridText;
+		if ((gridText == Tigris2.OK)) {
+			// TODO
+		} else if (gridText == Tigris2.CANCEL) {
+			// TODO
+		} else {
+			selected = (Grid) sel;
+			if (lastSelected != null) {
+				lastSelected.setTile(selected);
 
-					// do nothing
-
+				if ((lastSelected.getActionCommand()).endsWith("B")) {
+					lastSelected.setBorder(null);
 				} else {
-					selected = (Grid) sel;
-					if (lastSelected != null) {
-						lastSelected.setTile(selected);
-
-						if ((lastSelected.getActionCommand()).endsWith("B")) {
-							lastSelected.setBorder(null);
-							// Board.lastSelected=null;
-							// selected=null;
-						} else {
-							lastSelected.setBorder(BorderFactory
-									.createEtchedBorder());
-						}
-					}
+					lastSelected.setBorder(BorderFactory.createEtchedBorder());
 				}
-				selected.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,
-						Color.green));
-				lastSelected = selected;
 			}
 		}
+		selected.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2,
+				Color.green));
+		lastSelected = selected;
 	}
 }

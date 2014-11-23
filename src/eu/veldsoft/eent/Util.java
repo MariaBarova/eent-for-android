@@ -2,6 +2,6 @@ package eu.veldsoft.eent;
 
 import java.util.Random;
 
-public class Util {
+class Util {
 	public static final Random PRNG = new Random();
 }
